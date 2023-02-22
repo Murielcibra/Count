@@ -1,14 +1,19 @@
 "use strict";
 let counter = 0;
+let counterColor = 0;
 
 document.addEventListener("click", increaseCounter);
 
 function increaseCounter() {
   counter = counter + 1;
+  counterColor++;
+  if (counterColor % 100 === 0) {
+    counterColor = 0;
+  }
+  const counterDiv = document.getElementById("counterEl");
+  counterDiv.style.setProperty("--counter", counterColor + "%");
   const counterLabel = document.getElementById("counter");
   counterLabel.innerHTML = counter;
-  const counterDiv = document.getElementById("counterEl");
-  counterDiv.style.setProperty("--counter", counter + "%");
 }
 
 document.addEventListener("keydown", (event) => {
@@ -24,6 +29,8 @@ document.addEventListener("keydown", (event) => {
 
 function reset() {
   counter = -1;
+  counterColor = -1;
   increaseCounter();
   counter = -1;
+  counterColor = -1;
 }
